@@ -14,12 +14,12 @@ var container = $$({}, '<div class="container">');
 $$.document.append(container);
 
 if (AccessToken != "") {
-	console.log("https://api.instagram.com/v1/users/self/media/recent/?access_token="+AccessToken);
+	console.log("https://api.instagram.com/v1/users/self/feed/?access_token="+AccessToken);
 	$.ajax({
         type: "GET",
         dataType: "jsonp",
         cache: false,
-        url: "https://api.instagram.com/v1/users/self/media/recent/?access_token="+AccessToken,
+        url: "https://api.instagram.com/v1/users/self/feed/?access_token="+AccessToken,
         success:  function(data) {
 		for (var i = 0; i < 10; i++) {
 		var temp = $$({}, "<img src='" + data.data[i].images.low_resolution.url +"'>");

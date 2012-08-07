@@ -8,7 +8,7 @@ function getUrlVar(key){
 	return result && unescape(result[1]) || ""; 
 }
 var AccessToken = getUrlVar('access_token');
-var nextURL = "https://api.instagram.com/v1/users/self/feed/?COUNT=19&access_token="+AccessToken;
+var nextURL = "https://api.instagram.com/v1/users/self/feed/?COUNT=15&access_token="+AccessToken;
 
 
 var container = $$({}, '<div class="container">');

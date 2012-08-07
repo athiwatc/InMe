@@ -8,6 +8,7 @@ function getUrlVar(key){
 	return result && unescape(result[1]) || ""; 
 }
 var AccessToken = getUrlVar('access_token');
+var nextURL = "https://api.instagram.com/v1/users/self/feed/?COUNT=18&access_token="+AccessToken;
 
 
 var container = $$({}, '<div class="container">');
@@ -19,24 +20,12 @@ if (AccessToken != "") {
         type: "GET",
         dataType: "jsonp",
         cache: false,
-        url: "https://api.instagram.com/v1/users/self/feed/?access_token="+AccessToken,
+        url: nextURL,
         success:  function(data) {
+        nextURL = data.pagination.next_url;
 		for (var i = 0; i < data.data.length; i++) {
-		var temp = $$({}, "<img src='" + data.data[i].images.low_resolution.url +"'>");
-		container.append(temp);
-		}
-	}});
-	
-	$.ajax({
-        type: "GET",
-        dataType: "jsonp",
-        cache: false,
-        url: "https://api.instagram.com/v1/media/popular?client_id="+ClientID,
-        success:  function(data) {
-		for (var i = 0; i < data.data.length; i++) {
-		var temp = $$({}, "<img src='" + data.data[i].images.low_resolution.url +"'>");
-		container.append(temp);
-		console.log("test");
+			var temp = $$({}, "<img src='" + data.data[i].images.low_resolution.url +"'>");
+			container.append(temp);
 		}
 	}});
 
@@ -56,16 +45,16 @@ container.append(loginButton);
 
 $(window).scroll(function() {
    if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
-       	$.ajax({
+       $.ajax({
         type: "GET",
         dataType: "jsonp",
         cache: false,
-        url: "https://api.instagram.com/v1/media/popular?client_id="+ClientID,
+        url: nextURL,
         success:  function(data) {
+        nextURL = data.pagination.next_url;
 		for (var i = 0; i < data.data.length; i++) {
-		var temp = $$({}, "<img src='" + data.data[i].images.low_resolution.url +"'>");
-		container.append(temp);
-		console.log("test");
+			var temp = $$({}, "<img src='" + data.data[i].images.low_resolution.url +"'>");
+			container.append(temp);
 		}
 	}});
    }

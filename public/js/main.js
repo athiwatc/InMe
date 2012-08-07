@@ -15,7 +15,6 @@ var container = $$({}, '<div class="container">');
 $$.document.append(container);
 
 if (AccessToken != "") {
-	console.log("https://api.instagram.com/v1/users/self/feed/?access_token="+AccessToken);
 	$.ajax({
         type: "GET",
         dataType: "jsonp",

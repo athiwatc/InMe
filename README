@@ -1,4 +1,4 @@
-This is your new Play 2.0 application
+InMe - an Instagram Image Viewer Written In Scala/Play 2.0
 =====================================
 
-This file will be packaged with your application, when using `play dist`.
+You can visit the demo at http://inme.herokuapp.com

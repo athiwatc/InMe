@@ -2,3 +2,25 @@ InMe - an Instagram Image Viewer Written In Scala/Play 2.0
 =====================================
 
 You can visit the demo at http://inme.herokuapp.com
+
+Frontend dependency checks
+--------------------------
+
+The vendored jQuery asset is the official 3.7.1 release. It fixes the known
+jQuery 1.x security issues while retaining the APIs needed by this legacy app.
+Bootstrap 2.0.4 and Agility include small compatibility patches for jQuery 3:
+placeholder '#' selectors, keyboard event detection, and collection lengths.
+The application does not use jQuery Migrate or restore unsafe legacy behavior.
+
+Run the frontend regression suite with Node 22.22.2+, 24.15.0+, or 26+:
+
+    npm --prefix tests ci
+    npm --prefix tests test
+
+The tests check the official jQuery SHA-256, prototype-pollution protection,
+HTML-prefilter behavior, login state, mocked feed/profile/pagination responses,
+Agility rendering and bindings, and both Bootstrap builds. These are DOM tests
+using jsdom, not a full browser, Scala/Play build, or live Instagram API test.
+Test dependencies are development-only and are not served by the app.
+
+Vendor sources and local patches are recorded in public/js/VENDOR.md.

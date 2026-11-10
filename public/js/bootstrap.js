@@ -101,7 +101,7 @@
       selector = selector && selector.replace(/.*(?=#[^\s]*$)/, '') //strip for ie7
     }
 
-    $parent = $(selector)
+    $parent = $(selector === '#' ? [] : selector)
 
     e && e.preventDefault()
 
@@ -621,7 +621,7 @@
         selector = selector && selector.replace(/.*(?=#[^\s]*$)/, '') //strip for ie7
       }
 
-      $parent = $(selector)
+      $parent = $(selector === '#' ? [] : selector)
       $parent.length || ($parent = $this.parent())
 
       isActive = $parent.hasClass('open')
@@ -1708,7 +1708,7 @@
         .on('keypress', $.proxy(this.keypress, this))
         .on('keyup',    $.proxy(this.keyup, this))
 
-      if ($.browser.webkit || $.browser.msie) {
+      if ('onkeydown' in this.$element[0]) {
         this.$element.on('keydown', $.proxy(this.keypress, this))
       }
 
